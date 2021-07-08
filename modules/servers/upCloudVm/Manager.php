@@ -149,6 +149,7 @@ class Manager
     {
         $zone = ($this->params['configoptions']['Location'] == '') ? $this->params['configoption1'] : $this->params['configoptions']['Location'];
         $size = ($this->params['configoptions']['Storage'] == '') ? 10 : $this->params['configoptions']['Storage'];
+        $template = ($this->params['configoptions']['Template'] == '') ? $this->params['configoption3'] : $this->params['configoptions']['Template'];
 
         $hddAvaliable = ['fi-hel', 'sg-sin', 'uk-lon'];
         $tier = 'maxiops';
@@ -174,7 +175,7 @@ class Manager
                 'storage_devices' => [
                     'storage_device' => [
                         'action' => 'clone',
-                        'storage' => $this->params['configoption3'],
+                        'storage' => $template,
                         'title' => 'VM-'.$this->params['serviceid'].' Storage',
                         'size' => $size,
                         'tier' => $tier,
@@ -399,7 +400,8 @@ class Manager
      */
     public function getTemplate()
     {
-        return $this->callApi('get', '/storage/'.$this->params['configoption3']);
+        //return $this->callApi('get', '/storage/'.$this->params['configoption3']);
+        return $this->callApi('get', '/storage/'.$this->params['configoptions']['Template']);
     }
 
     /**
